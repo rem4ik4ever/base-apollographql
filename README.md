@@ -8,3 +8,7 @@
 - mongoose
 - nodemon
 - babel
+
+### Run server
+
+`docker-compose up -d`
