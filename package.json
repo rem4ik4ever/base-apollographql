@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec babel-node -- src/index.js"
+    "start": "nodemon -L --exec babel-node -- src/index.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,7 @@
     "apollo-server-express": "^2.9.6",
     "express": "^4.17.1",
     "graphql": "^14.5.8",
+    "lodash": "^4.17.15",
     "mongoose": "^5.7.5"
   }
 }

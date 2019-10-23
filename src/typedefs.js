@@ -1,15 +1,15 @@
 import { gql } from "apollo-server-express";
+import { UserDef } from "./schemas/User";
 
-export const typeDefs = gql`
+const queryRoot = `
   type Query {
-    hello: String!
-    cats: [Cat!]!
-  }
-  type Cat {
-    id: ID!
-    name: String!
+    _empty: String
   }
   type Mutation {
-    createCat(name: String!): Cat!
+    createUser(email: String!, password: String!): User!
   }
 `;
+
+const typeDefs = [queryRoot, UserDef];
+
+export default typeDefs;

@@ -1,15 +1,10 @@
-import { Cat } from "./models/Cat";
+import { UserResolver } from "./schemas/User";
+import { merge } from "lodash";
 
-export const resolvers = {
-  Query: {
-    hello: () => "hi",
-    cats: () => Cat.find()
-  },
-  Mutation: {
-    createCat: async (_, { name }) => {
-      const kitty = new Cat({ name });
-      await kitty.save();
-      return kitty;
-    }
-  }
+const hello = {
+  Query: {}
 };
+
+const resolvers = merge(hello, UserResolver);
+
+export default resolvers;

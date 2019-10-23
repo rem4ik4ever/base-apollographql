@@ -1,16 +1,18 @@
-import { ApolloServer, gql } from "apollo-server-express";
+import { ApolloServer, gql, makeExecutableSchema } from "apollo-server-express";
 import express from "express";
 import mongoose from "mongoose";
-import { resolvers } from "./resolvers";
-import { typeDefs } from "./typedefs";
+import resolvers from "./resolvers";
+import typeDefs from "./typedefs";
 
 const startServer = async () => {
   const app = express();
 
-  const server = new ApolloServer({
-    typeDefs,
-    resolvers
+  const schema = makeExecutableSchema({
+    typeDefs: typeDefs,
+    resolvers: resolvers
   });
+
+  const server = new ApolloServer({ schema });
 
   server.applyMiddleware({ app });
 
