@@ -5,9 +5,7 @@ const queryRoot = `
   type Query {
     _empty: String
   }
-  type Mutation {
-    createUser(email: String!, password: String!): User!
-  }
+  
 `;
 
 const typeDefs = [queryRoot, UserDef];

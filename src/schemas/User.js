@@ -11,6 +11,10 @@ export const UserDef = `
     email: String!
     password: String!
   }
+
+  type Mutation {
+    createUser(email: String!, password: String!): User!
+  }
   
 `;
 
