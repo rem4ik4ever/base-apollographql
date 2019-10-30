@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "tstart": "nodemon -L --exec ts-node src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon -L --exec babel-node -- src/index.js"
   },
@@ -15,14 +16,25 @@
     "@babel/core": "^7.6.4",
     "@babel/node": "^7.6.3",
     "@babel/preset-env": "^7.6.3",
-    "nodemon": "^1.19.4"
+    "@types/bcryptjs": "^2.4.2",
+    "@types/express": "^4.17.1",
+    "@types/graphql": "^14.5.0",
+    "@types/node": "^12.12.0",
+    "nodemon": "^1.19.4",
+    "ts-node": "^8.4.1",
+    "typescript": "^3.6.4"
   },
   "dependencies": {
     "apollo-server-express": "^2.9.6",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "graphql": "^14.5.8",
     "lodash": "^4.17.15",
-    "mongoose": "^5.7.5"
+    "mongoose": "^5.7.5",
+    "pg": "^7.12.1",
+    "reflect-metadata": "^0.1.13",
+    "type-graphql": "^0.17.5",
+    "typeorm": "^0.2.20"
   }
 }

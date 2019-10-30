@@ -1,7 +1,7 @@
 version: "3"
 services:
   app:
-    container_name: express-mongo
+    container_name: app
     restart: always
     build: ./
     ports:
@@ -9,9 +9,38 @@ services:
     volumes:
       - .:/app
     links:
-      - mongo
-  mongo:
-    container_name: mongo
-    image: mongo
+      - postgres
+  # mongo:
+  #   container_name: mongo
+  #   image: mongo
+  #   ports:
+  #     - "27017:27017"
+  postgres:
+    container_name: postgres_container
+    image: postgres:11.5-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      POSTGRES_DB: graphql-db
+      PGDATA: /data/postgres
+    volumes:
+      - postgres:/data/postgres
     ports:
-      - "27017:27017"
+      - "5432:5432"
+    restart: unless-stopped
+
+  pgadmin:
+    container_name: pgadmin_container
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_DEFAULT_EMAIL:-admin@admin.org}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD:-admin}
+    volumes:
+      - pgadmin:/root/.pgadmin
+    ports:
+      - "${PGADMIN_PORT:-5050}:80"
+    restart: unless-stopped
+
+volumes:
+  postgres:
+  pgadmin:
