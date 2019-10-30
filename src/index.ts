@@ -1,8 +1,9 @@
 import { ApolloServer } from "apollo-server-express";
 import * as express from "express";
-import { buildSchema, Resolver, Query } from "type-graphql";
+import { buildSchema } from "type-graphql";
 import "reflect-metadata";
 import { createConnection } from "typeorm";
+import { RegisterResolver } from "./modules/user/Register";
 
 // import mongoose from "mongoose";
 // import resolvers from "./resolvers";
@@ -10,21 +11,13 @@ import { createConnection } from "typeorm";
 
 // import { config } from "dotenv";
 
-@Resolver()
-class HelloResolver {
-  @Query(() => String)
-  async hello() {
-    return await "Hello Rem!";
-  }
-}
-
 const startServer = async () => {
   await createConnection();
 
   const app = express();
 
   const schema = await buildSchema({
-    resolvers: [HelloResolver]
+    resolvers: [RegisterResolver]
   });
 
   // const schema = makeExecutableSchema({
