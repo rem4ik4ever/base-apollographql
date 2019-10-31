@@ -1,5 +1,5 @@
 import { ApolloServer } from "apollo-server-express";
-import * as express from "express";
+import express from "express";
 import { buildSchema } from "type-graphql";
 import "reflect-metadata";
 import { createConnection } from "typeorm";
@@ -25,7 +25,9 @@ const startServer = async () => {
   //   resolvers: resolvers
   // });
 
-  const server = new ApolloServer({ schema });
+  const server = new ApolloServer({
+    schema
+  });
 
   server.applyMiddleware({ app });
 

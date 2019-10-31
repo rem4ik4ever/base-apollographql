@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "tstart": "nodemon -L --exec ts-node src/index.ts",
+    "tstart": "ts-node-dev --respawn src/index.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon -L --exec babel-node -- src/index.js"
   },
@@ -22,11 +22,13 @@
     "@types/node": "^12.12.0",
     "nodemon": "^1.19.4",
     "ts-node": "^8.4.1",
+    "ts-node-dev": "^1.0.0-pre.43",
     "typescript": "^3.6.4"
   },
   "dependencies": {
     "apollo-server-express": "^2.9.6",
     "bcryptjs": "^2.4.3",
+    "class-validator": "^0.10.2",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "graphql": "^14.5.8",
