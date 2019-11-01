@@ -3,17 +3,10 @@ import express from "express";
 import { buildSchema } from "type-graphql";
 import "reflect-metadata";
 import { createConnection } from "typeorm";
-import { RegisterResolver } from "./modules/user/Register";
 import session from "express-session";
 import connectRedis from "connect-redis";
-import { redis } from "./redis";
+import { redis } from "./config/redis-connect";
 import cors from "cors";
-import { LoginResolver } from "./modules/user/Login";
-import { MeResolver } from "./modules/user/Me";
-
-// import mongoose from "mongoose";
-// import resolvers from "./resolvers";
-// import typeDefs from "./typedefs";
 
 // import { config } from "dotenv";
 
@@ -23,7 +16,7 @@ const startServer = async () => {
   const app = express();
 
   const schema = await buildSchema({
-    resolvers: [RegisterResolver, LoginResolver, MeResolver],
+    resolvers: [__dirname + "/modules/**/*.ts"],
     authChecker: ({ context: { req } }) => {
       if (req.session.userId) {
         return true;
@@ -31,11 +24,6 @@ const startServer = async () => {
       return false;
     }
   });
-
-  // const schema = makeExecutableSchema({
-  //   typeDefs: typeDefs,
-  //   resolvers: resolvers
-  // });
 
   const server = new ApolloServer({
     schema,
@@ -69,12 +57,6 @@ const startServer = async () => {
   );
 
   server.applyMiddleware({ app });
-
-  // await mongoose.connect("mongodb://mongo:27017/test", {
-  //   useNewUrlParser: true
-  // });
-  // config();
-  // console.log("ENV", process.env.APP_SECRET);
 
   app.listen({ port: 4000 }, () =>
     console.log(`Server ready at http://localhost:4000${server.graphqlPath}`)
