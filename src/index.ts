@@ -7,6 +7,7 @@ import connectRedis from "connect-redis";
 import { redis } from "./config/redis-connect";
 import cors from "cors";
 import { createSchema } from "./utils/createSchema";
+import { getPlugins } from "./config/apollo-plugins";
 
 // import { config } from "dotenv";
 
@@ -17,8 +18,10 @@ const startServer = async () => {
 
   const schema = await createSchema();
 
+  const plugins = getPlugins(schema);
   const server = new ApolloServer({
     schema,
+    plugins,
     context: ({ req, res }: any) => ({ req, res })
   });
 
